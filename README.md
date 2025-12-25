@@ -62,7 +62,7 @@ Open_Chat_Application/
 ## 📸 Screenshots
 
 ### Desktop View
-![Desktop Chat UI](screenshots/desktop-chat.png)
+![Desktop Chat UI](screenshots/desktop-view.png)
 
 ### Mobile View
 ![Mobile Chat UI](screenshots/mobile-view.jpeg)
