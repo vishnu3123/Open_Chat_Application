@@ -23,6 +23,7 @@ A real-time, multi-user chat application built using **Node.js**, **Express**, a
 ---
 
 ## 📂 Project Structure
+```
 Open_Chat_Application/
 │
 ├── uiLayer/
@@ -34,7 +35,7 @@ Open_Chat_Application/
 ├── package.json
 ├── package-lock.json
 └── README.md
-
+```
 ---
 
 ## ▶️ How to Run Locally
