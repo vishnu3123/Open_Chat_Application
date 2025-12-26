@@ -9,7 +9,7 @@ A real-time, multi-user chat application built using **Node.js**, **Express**, a
 - Instant join/leave notifications
 - Responsive dark UI (Desktop & Mobile)
 - WebSocket-based communication using Socket.IO
-- Cloud deployed for public access
+- Deployed on Render (free tier) for public access
 - Demonstrates real-time client–server communication
 
 ---
@@ -91,6 +91,12 @@ https://youtu.be/jEdyRr2BL08
 
 ---
 
+## Academic Note
+This project is shared publicly for learning and demonstration purposes.
+Please do not submit this work as your own for academic requirements.
+
+---
+
 ## 👤 Author
 **Padakanti Harshith**  
 B.Tech CSE – 2nd Year  
@@ -98,4 +104,6 @@ B.Tech CSE – 2nd Year
 ---
 
 ## 📜 License
-This project is for educational purposes.
+This project is licensed under the MIT License.  
+See the [LICENSE](LICENSE) file for details.
+
