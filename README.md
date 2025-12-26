@@ -99,7 +99,7 @@ Please do not submit this work as your own for academic requirements.
 
 ## 👤 Author
 **Padakanti Harshith**  
-B.Tech CSE – 2nd Year  
+B.Tech Computer Science and Engineering Undergraduate
 
 ---
 
