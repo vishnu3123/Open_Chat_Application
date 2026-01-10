@@ -183,7 +183,6 @@ Open_Chat_Application/
 
 *Live deployment on Render platform*
 
-<br>
 ---
 
 ## 🎯 Learning Outcomes
