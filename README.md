@@ -155,25 +155,30 @@ Open_Chat_Application/
 
 *Spacious layout with room list sidebar and chat area*
 
+
 ### 📱 Mobile View
-![Mobile Responsive Design](screenshots/mobile-view.png)
+![Mobile Responsive Design](<img src="screenshots/mobile-view.png" width="300">)
 
 *Optimized for touch interactions and smaller screens*
+
 
 ### 🏠 Create Room Interface
 ![Create Room Modal](screenshots/create-room.png)
 
 *Intuitive room creation with all options visible*
 
+
 ### 💬 Active Chat Room
 ![Chat Room in Action](screenshots/chat-room.png)
 
 *Real-time messaging with typing indicators and user list*
 
+
 ### 🔌 WebSocket Connection
 ![WebSocket 101 Protocol](screenshots/websocket-101.png)
 
 *Developer tools showing active WebSocket connection*
+
 
 ### ☁️ Cloud Deployment
 ![Render Deployment Dashboard](screenshots/render-deploy.png)
