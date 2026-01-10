@@ -182,7 +182,8 @@ Open_Chat_Application/
 ![Render Deployment Dashboard](screenshots/render-deploy.png)
 
 *Live deployment on Render platform*
-<br><br>
+
+<br>
 ---
 
 ## 🎯 Learning Outcomes
