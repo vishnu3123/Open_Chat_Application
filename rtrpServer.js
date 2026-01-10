@@ -37,32 +37,37 @@ io.on("connection", (socket) => {
   // Send current rooms list
   socket.emit("rooms-list", Array.from(rooms.values()));
 
-  // Create room
-  socket.on("create-room", ({ roomName, password, isPrivate, maxUsers, owner }) => {
-    if (rooms.size >= MAX_ROOMS) {
-      socket.emit("error", "Maximum 101 rooms reached");
-      return;
-    }
+ // Create room
+socket.on("create-room", ({ roomName, password, isPrivate, maxUsers, owner }) => {
+  if (rooms.size >= MAX_ROOMS) {
+    socket.emit("error", "Maximum 101 rooms reached");
+    return;
+  }
 
-    if (rooms.has(roomName.toLowerCase())) {
-      socket.emit("error", "Room name already exists");
-      return;
-    }
+  if (rooms.has(roomName.toLowerCase())) {
+    socket.emit("error", "Room name already exists");
+    return;
+  }
 
-    const room = {
-      id: roomName.toLowerCase(),
-      name: roomName,
-      owner,
-      password: password || "",
-      isPrivate,
-      maxUsers,
-      users: [],
-      typingUsers: []
-    };
+  const room = {
+    id: roomName.toLowerCase(),
+    name: roomName,
+    owner,
+    password: password || "",
+    isPrivate,
+    maxUsers,
+    users: [],
+    typingUsers: []
+  };
 
-    rooms.set(room.id, room);
-    io.emit("rooms-list", Array.from(rooms.values()));
-  });
+  rooms.set(room.id, room);
+  
+  // Notify creator that room is ready
+  socket.emit("room-created", room);
+  
+  // Update rooms list for everyone
+  io.emit("rooms-list", Array.from(rooms.values()));
+});
 
   // Join room
   socket.on("join-room", ({ roomId, username, password }) => {

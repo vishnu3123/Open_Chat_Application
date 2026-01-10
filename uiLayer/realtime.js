@@ -128,58 +128,59 @@ document.addEventListener("DOMContentLoaded", () => {
     passwordGroup.style.display = isPrivate.checked ? 'block' : 'none';
   });
 
-  // Create room
-  confirmCreateRoom.addEventListener("click", () => {
-    const name = newRoomName.value.trim();
-    const max = parseInt(maxUsers.value);
-    const owner = prompt("Enter your username to create this room:");
+// Create room
+confirmCreateRoom.addEventListener("click", () => {
+  const name = newRoomName.value.trim();
+  const max = parseInt(maxUsers.value);
+  const owner = prompt("Enter your username to create this room:");
 
-    if (!owner || !owner.trim()) {
-      alert("Username is required!");
-      return;
-    }
+  if (!owner || !owner.trim()) {
+    alert("Username is required!");
+    return;
+  }
 
-    if (!name || name.length < 2) {
-      alert("Room name must be at least 2 characters!");
-      return;
-    }
+  if (!name || name.length < 2) {
+    alert("Room name must be at least 2 characters!");
+    return;
+  }
 
-    if (max < 2 || max > 100) {
-      alert("Max users must be between 2 and 100!");
-      return;
-    }
+  if (max < 2 || max > 100) {
+    alert("Max users must be between 2 and 100!");
+    return;
+  }
 
-    const password = isPrivate.checked ? roomPassword.value : "";
+  const password = isPrivate.checked ? roomPassword.value : "";
 
-    if (isPrivate.checked && !password) {
-      alert("Password required for private rooms!");
-      return;
-    }
+  if (isPrivate.checked && !password) {
+    alert("Password required for private rooms!");
+    return;
+  }
 
-    socket.emit("create-room", {
-      roomName: name,
-      password,
-      isPrivate: isPrivate.checked,
-      maxUsers: max,
-      owner: owner.trim()
+  // Store data for auto-join
+  const roomData = {
+    roomName: name,
+    password,
+    isPrivate: isPrivate.checked,
+    maxUsers: max,
+    owner: owner.trim()
+  };
+
+  currentUsername = owner.trim();
+
+  socket.emit("create-room", roomData);
+
+  createRoomModal.classList.remove('active');
+  resetCreateForm();
+
+  // Set flag to auto-join after room is created
+  socket.once("room-created", (createdRoom) => {
+    socket.emit("join-room", {
+      roomId: createdRoom.id,
+      username: currentUsername,
+      password: password
     });
-
-    createRoomModal.classList.remove('active');
-    resetCreateForm();
-
-    // Auto-join the created room
-    setTimeout(() => {
-      const room = allRooms.find(r => r.name === name);
-      if (room) {
-        currentUsername = owner.trim();
-        socket.emit("join-room", {
-          roomId: room.id,
-          username: currentUsername,
-          password
-        });
-      }
-    }, 300);
   });
+});
 
   // Join room
   confirmJoinRoom.addEventListener("click", () => {
