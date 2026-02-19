@@ -172,30 +172,30 @@ function leaveRoom(socket) {
   const room = rooms.get(socket.currentRoom);
   if (!room) return;
 
-  // Remove user
+  const roomName = socket.currentRoom;
+  const username = socket.username;
+
+  socket.leave(roomName);
+
   room.users = room.users.filter(u => u.id !== socket.id);
-  room.typingUsers = room.typingUsers.filter(u => u !== socket.username);
+  room.typingUsers = room.typingUsers.filter(u => u !== username);
 
-  // Notify room with timestamp
-  io.to(socket.currentRoom).emit("room-message", {
-    type: "system",
-    text: `${socket.username} left the room`,
-    timestamp: new Date()
-  });
-
-  // Delete room if empty
-  if (room.users.length === 0) {
-    rooms.delete(socket.currentRoom);
-  } else {
-    rooms.set(socket.currentRoom, room);
-    // Update room info for remaining users
-    io.to(socket.currentRoom).emit("room-updated", room);
+  if (room.users.length > 0) {
+    io.to(roomName).emit("room-message", {
+      type: "system",
+      text: `${username} left the room`,
+      timestamp: new Date()
+    });
+    rooms.set(roomName, room);
+    io.to(roomName).emit("room-updated", room);
   }
 
-  socket.leave(socket.currentRoom);
+  if (room.users.length === 0) {
+    rooms.delete(roomName);
+  }
+
   socket.currentRoom = null;
 
-  // Update rooms list
   io.emit("rooms-list", Array.from(rooms.values()));
 }
 
